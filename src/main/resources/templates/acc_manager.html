@@ -90,12 +90,12 @@
        <button class="close-button" id="close-button">X</button>
        <div class="input-form"> 
         <h1>Thêm mới sinh viên</h1>  
-           <input id="id" type="text" placeholder="Tên đăng nhập" />
-           <input id="email" type="email" placeholder="Email" />
-           <input id="name" type="text" placeholder="Họ tên" />
-           <input id="birthday" type="text" placeholder="Ngày sinh dạng yyyy-mm-dd" />
-           <input id="password" type="password" placeholder="Mật khẩu" />
-           <button class="btnThem" id="btnThem">Thêm</button>
+           <input id="id" type="text" placeholder="Tên đăng nhập" required/>
+           <input id="email" type="email" placeholder="Email" required/>
+           <input id="name" type="text" placeholder="Họ tên" required/>
+           <input id="birthday" type="text" placeholder="Ngày sinh dạng yyyy-mm-dd" required/>
+           <input id="password" type="password" placeholder="Mật khẩu" required/>
+           <button type="submit" class="btnThem" id="btnThem">Thêm</button>
        </div>
     </div>
     
@@ -109,7 +109,7 @@
            <input id="email-edit" type="email" placeholder="Email" readonly/>
            <input id="name-edit" type="text" placeholder="Họ tên" />
            <input id="birthday-edit" type="text" placeholder="Ngày sinh dạng yyyy-mm-dd" />
-           <input id="password-edit" type="text" placeholder="Mật khẩu" />
+           <input id="password-edit" type="password" placeholder="Mật khẩu" />
            <button class="btnThem" id="btnSua" onclick="Xacnhansua()">Xác nhận</button>
        </div>
     </div>

@@ -83,8 +83,9 @@ public class UserService {
               System.out.println("error");
           }
 
-          Set<Roles> set = new HashSet<>(user.getRoles());
-
+          Set<Roles> set = new HashSet<>();
+          Roles e = new Roles(1,"USER");
+          set.add(e);
           newUser.setRoles(set);
           System.out.println(newUser);
         userDao.save(newUser);
@@ -141,9 +142,10 @@ public class UserService {
             .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         existingUser.setEmail(updatedUser.getEmail());
-        existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        if(!updatedUser.getPassword().isEmpty()) {
+            existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        }
         existingUser.setUsername(updatedUser.getUsername());
-        existingUser.setRoles(new HashSet<Roles>(updatedUser.getRoles()));
           existingUser.setFullName(updatedUser.getFullName());
           String pattern = "yyyy-MM-dd";
           SimpleDateFormat sdf = new SimpleDateFormat(pattern);

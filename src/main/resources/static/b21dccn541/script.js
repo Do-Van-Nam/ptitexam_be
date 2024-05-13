@@ -113,7 +113,7 @@ document.getElementById("btnThem").addEventListener("click", function () {
             alert("Xin vui lòng nhập ngày sinh đúng định dạng!")
             return
         }
-    if(password.legth<8){
+    if(password.length<6){
     alert("Xin vui lòng nhập mật khẩu gồm ít nhất 8 ký tự!")
                 return
     }
@@ -300,10 +300,11 @@ function Xacnhansua() {
         username: id.toString(),
         fullName: name.toString(),
         email: email.toString(),
-        password: (password.toString()  === "" )? roww.password:  password.toString(),
+        password: password.toString(),
         dob: birthday.toString(),
         roles: []
     }
+
     const jwt = localStorage.getItem('jwt')
     console.log(userId)
     $.ajax({
