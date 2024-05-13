@@ -12,6 +12,17 @@ public class ExamDto {
     private String endTime;
     List<Question> questionList;
 
+    public ExamDto() {
+    }
+
+    public ExamDto(String examTitle, String examDescription, String startTime, String endTime, List<Question> questionList) {
+        this.examTitle = examTitle;
+        this.examDescription = examDescription;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.questionList = questionList;
+    }
+
     public String getExamTitle() {
         return examTitle;
     }

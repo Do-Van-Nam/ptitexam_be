@@ -65,8 +65,12 @@ const ExamAPI = {
         "http://localhost:8080/exam/getAllExams",
         requestOptions
       );
-      const data = await response.json();
-      return data;
+      if(response.ok){
+        const data = await response.json();
+        return data;
+      } else if(response.status==401){
+            window.location.href="/admin";
+      }
     } catch (error) {
       console.error(error);
     }

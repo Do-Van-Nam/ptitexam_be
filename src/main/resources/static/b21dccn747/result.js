@@ -47,6 +47,9 @@ function displayTable (tkBT) {
     let out = "";
     var i=0;
     for (let baithi of tkBT){
+        if(baithi.start_time===null){
+            baithi.start_time="Chưa nộp"
+        }
         out+= 
         `
             <tr>

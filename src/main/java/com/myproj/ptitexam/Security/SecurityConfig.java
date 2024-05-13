@@ -48,7 +48,7 @@ public class SecurityConfig {
                                 "export.png", "/", "/admin", "/startExam","/statistic", "/acc_manager", "/exam_result",
                                 "/b21dccn747/**","b21dccn541/**","/B21DCCN687-styles/**", "/exam-admin/**", "/recovery", "/set-password", "/b21dccn747/result.js",
                                 "/B21DCCN687-js/**","/script001.js","styles001.css","/styles002.css","/script002.js").permitAll()
-                                .requestMatchers("/exam/getAllExams",
+                                .requestMatchers("/exam/getAllExams","/exam/examInfo",
                                         "/exam/getExams","/exam/getByExamTitleContaining", "/exam/resultDetail",
                                         "/exam/getExam","/exam/submit","/user/getResult","/exam/review").hasAnyAuthority("USER","ADMIN")
                                 .requestMatchers("/user/**","/exam/**","/statisticApi/**").hasAuthority("ADMIN")

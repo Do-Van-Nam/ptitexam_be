@@ -43,11 +43,14 @@ public class UserService {
             List<ExamResult> listResult= examResultDao.findByUser(user);
             List<ExamResultDTO> returnList = new ArrayList<>();
             for(ExamResult ex:listResult){
-                Timestamp timestamp = ex.getEndTime();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                String dateString = dateFormat.format(timestamp);
-                ExamResultDTO temp = new ExamResultDTO(ex.getId(),ex.getExam().getId(),ex.getUser().getUsername(),ex.getExam().getExamTitle(),ex.getScore(),dateString);
-                returnList.add(temp);
+                if(ex.getEndTime()== null){
+                }else {
+                    Timestamp timestamp = ex.getEndTime();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    String dateString = dateFormat.format(timestamp);
+                    ExamResultDTO temp = new ExamResultDTO(ex.getId(), ex.getExam().getId(), ex.getUser().getUsername(), ex.getExam().getExamTitle(), ex.getScore(), dateString);
+                    returnList.add(temp);
+                }
             }
             return new ResponseEntity<>(returnList,HttpStatus.OK);
         } catch (Exception e){

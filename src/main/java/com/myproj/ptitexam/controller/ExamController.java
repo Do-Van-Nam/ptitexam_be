@@ -108,6 +108,11 @@ public class ExamController {
         return examService.getResultDetail(resultId);
     }
 
+    @GetMapping("examInfo")
+    public ResponseEntity<?> getExamInfo(@RequestParam int exam_id){
+        return examService.getExamInfo(exam_id);
+    }
+
     // @GetMapping("")
     // public String getMethodName(@RequestParam String param) {
     //     return new String();

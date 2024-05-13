@@ -1,6 +1,5 @@
 if (localStorage.getItem('jwt')===null) {
-alert("Bạn chưa đăng nhập, vui lòng đăng nhập!")
-window.location.href="/login"}
+    window.location.href="/login"}
 
 var acc = [], rowindex=0 , roww;
 var userId = 0

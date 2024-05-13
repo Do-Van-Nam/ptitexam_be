@@ -5,7 +5,34 @@ var temp;
 window.onload = async function() {
     var time = 50*60, // Thời gian là 50 phút
         display = document.querySelector('#time');
-     // Lưu định danh của bộ đếm thời gian
+    const urlParams = new URLSearchParams(window.location.search);
+    var timeCheck = await fetch("http://localhost:8080/exam/examInfo?exam_id="+urlParams.get('exam_id'),
+    {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+        });
+    if(timeCheck.ok){
+        var timeCheckJson = await timeCheck.json();
+        if(timeCheckJson.endTime !==null){
+
+            var now = new Date();
+            console.log(timeCheckJson.endTime);
+            var endtime =Date.parse(timeCheckJson.endTime);
+            var temp = Math.abs(endtime -now)  ;
+            temp = temp/1000-60*5;
+            if(temp<time){
+                time = temp;
+            }
+        }
+    }else{
+        if(timeCheck.status==401){
+              window.location.href="/student";
+        }
+    }
 
     temp = await loadQuestions();
     timer = startTimer(time, display);
@@ -98,19 +125,26 @@ async function loadQuestions() {
         if(!response.ok){
             if(response.status==403){
                 window.alert("Không trong thời gian làm bài!");
-
+                window.location.href="/student/exam";
             }
-            window.location.href="/student/exam";
+            else if(response.status==401){
+                window.location.href="/student";
+            }
+            else if(response.status==404){
+                window.alert("Bài thi chưa khả dụng")
+                window.location.href="/student/exam";
+            }
+            console.log(response);
         }
         else{
         document.getElementById('startExamPage').style.display="block";
         const exam = await response.json();
         var questionList=exam.question;
-        console.log(questionList);
         var out="";
+        var cnt=1;
         for(question of questionList){
             out+=`
-            <h3 id=${question.id.toString()}>Câu hỏi: ${question.content}
+            <h3 id=${question.id.toString()}>Câu hỏi ${cnt.toString()}: ${question.content}
             </h3>
             <div class="options">
                 <label><input type="radio" name="${question.id}" value="${question.option1}">${question.option1}</label><br>
@@ -120,7 +154,9 @@ async function loadQuestions() {
             </div>
 
             `
+            cnt++;
         }
+
         document.getElementById("out-quiz").innerHTML=out;
         document.getElementById("submit-button").addEventListener("click",async ()=>{
 
@@ -180,11 +216,19 @@ function DangXuat(){
     localStorage.clear();
 }
 
+//window.onbeforeunload = function() {
+//    if(!check)
+//        return "";
+//}
+//window.onunload = function(){
+//    return window.alert("hiii");
+//    if(!check){
+//        outTimeSubmit();
+//    }
+//}
+
 window.onbeforeunload = function() {
     if(!check)
-        return "";
-}
-window.onunload = function(){
-    if(!check)
-        outTimeSubmit();
-}
+        return"";
+};
+

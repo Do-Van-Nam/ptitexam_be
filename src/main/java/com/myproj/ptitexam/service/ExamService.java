@@ -251,4 +251,15 @@ public class ExamService {
         return new ResponseEntity<>("khong hop le",HttpStatus.BAD_REQUEST);
     }
 
+    public ResponseEntity<?> getExamInfo(Integer exam_id) {
+        try {
+            System.out.println("hi");
+            Exam exam = examDao.findById(exam_id).orElseThrow( ()-> new Exception("Exam not found"));
+            List<Question> t = new ArrayList<>();
+            System.out.println("hi");
+            return new ResponseEntity<>(exam,HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.NOT_FOUND);
+        }
+    }
 }
