@@ -84,7 +84,7 @@ const validateInputs = () => {
                 }
                 else{
                     alert("Đăng kí thành công");
-                    window.location.href= "/student/login";
+                    window.location.href= "/student";
                 }
             })
             .catch(error => {

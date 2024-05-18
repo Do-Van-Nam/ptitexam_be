@@ -70,6 +70,7 @@ async function outTimeSubmit(){
     var response1 = await fetch("http://localhost:8080/exam/submit?take_id="+temp.takeId.toString(),requestOptions1);
     if(response1.ok){
         check=true;
+        document.getElementById("resultBtn").addEventListener("click",async ()=>{window.location.href = "/student/result?resultId="+temp.takeId.toString();});
         document.getElementById('resultBtn').style.display="block";
         document.getElementById("submit-button").style.display="none";
     }else{
@@ -193,6 +194,7 @@ async function loadQuestions() {
                 clearInterval(timer); // Dừng bộ đếm thời gian
                 alert("Bài của bạn đã được nộp!");
                 document.getElementById("submit-button").style.display="none";
+                document.getElementById("resultBtn").addEventListener("click",async ()=>{window.location.href = "/student/result?resultId="+exam.takeId.toString();});
                 document.getElementById('resultBtn').style.display="block";
             }else{
                 console.log("Lỗi nộp bài");
@@ -208,9 +210,7 @@ async function loadQuestions() {
 }
 
 
-function showResultPage() {
-    window.location.href = window.location.href="/student/result?resultId="+temp.takeId.toString();
-}
+
 
 function DangXuat(){
     localStorage.clear();
@@ -230,5 +230,7 @@ function DangXuat(){
 window.onbeforeunload = function() {
     if(!check)
         return"";
+    else{
+    }
 };
 

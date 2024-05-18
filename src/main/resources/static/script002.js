@@ -30,15 +30,16 @@ async function loadResult() {
         <div id="submitTime" style="display: flex; align-items: center; justify-content: center;">Thời gian nộp bài: ${timeFormat(json.endTime)}</div>`
         }
         var asnswerList=json.details;
-        console.log(asnswerList);
         var out="";
+        var i=1;
         for(answer of asnswerList){
             var question=answer.question;
 
             out+=`
             <div class="question-container">
-            <p>${answer.questionTitle}</p>
+            <p>Câu ${i.toString()}: ${answer.questionTitle}</p>
             `
+            i++;
             var op1 = `<label ><input type="radio" disabled="">${answer.option1}</label>`;
             var op2 = `<label ><input type="radio" disabled="" >${answer.option2}</label>`;
             var op3 = `<label ><input type="radio" disabled="">${answer.option3}</label>`;
