@@ -131,11 +131,30 @@ public class ExamService {
         }
     }
 
+    public ResponseEntity<?> getAllExamsUser() {
+        try {
+            List<Exam> list_exam = examDao.findAll();
+            List<Exam> returnList = new ArrayList<>();
+            for(Exam ex:list_exam){
+                if(ex.getEndTime()!=null && ex.getEndTime().after(new Date()))
+                    returnList.add(ex);
+                else if(ex.getStartTime()==null)
+                    returnList.add(ex);
+            }
+            if(returnList.isEmpty()) {
+                return new ResponseEntity<>("There are no exams", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(returnList, HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public ResponseEntity<?> getAllExams() {
         try {
             List<Exam> list_exam = examDao.findAll();
             if(list_exam.isEmpty()) {
-                return new ResponseEntity<>("There are no exams", HttpStatus.OK);
+                return new ResponseEntity<>("There are no exams", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list_exam, HttpStatus.OK);
         } catch(Exception e) {
@@ -256,7 +275,6 @@ public class ExamService {
             System.out.println("hi");
             Exam exam = examDao.findById(exam_id).orElseThrow( ()-> new Exception("Exam not found"));
             List<Question> t = new ArrayList<>();
-            System.out.println("hi");
             return new ResponseEntity<>(exam,HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>(e,HttpStatus.NOT_FOUND);

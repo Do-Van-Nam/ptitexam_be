@@ -45,6 +45,12 @@ public class ExamController {
         return examService.getAllExams();
     }
 
+
+    @GetMapping("/getAllExamsUser")
+    public ResponseEntity<?> getAllExamsUser(){
+        return examService.getAllExamsUser();
+    }
+
     @GetMapping("/getExams")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> getExams(@RequestParam int type){

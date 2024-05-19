@@ -10,9 +10,10 @@ async function fetchExam() {
                     'Authorization': `Bearer ${jwt}`
                 },
             };
-            const response = await fetch("http://localhost:8080/exam/getAllExams",requestOptions)
+            const response = await fetch("http://localhost:8080/exam/getAllExamsUser",requestOptions)
             if(!response.ok){
-                window.location.href="/student";
+                if(response.status==401)
+                    window.location.href="/student";
             }
             else{
             document.getElementById('user-page').style.display="block";
