@@ -46,10 +46,7 @@ public class AuthController {
         return authService.forgetPassword(email);
     }
 
-    // @GetMapping("set-password")
-    // public ResponseEntity<String> setPassword(@RequestParam String email, @RequestParam String token, @RequestParam String newPassword) {
-    //     return authService.setPassword(email, token, newPassword);
-    // }
+
     @PutMapping("/set-password")
     public ResponseEntity<String> setPassword(@RequestParam String email, @RequestParam String token, @RequestParam String newPassword) {
         return authService.setPassword(email, token, newPassword);
